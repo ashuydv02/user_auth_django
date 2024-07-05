@@ -1,0 +1,50 @@
+{% extends 'accounts/home.html' %}
+  {% block content %}
+      <h1>User Registration Form</h1>
+      <form method="post">
+          {% csrf_token %}
+          {% if form %}
+              {% for field in form %}
+                  {% if field.errors %}
+                      {% for error in field.errors %}
+                      <div class="alert alert-danger" role="alert">
+                          {{field.label}} : {{error}}
+                      </div>
+                      {% endfor %}
+                  {% endif %}
+              {% endfor %}
+          {% endif %}
+          <div class="form-control">
+            <label for="exampleInputUsername">User Name</label>
+            <input type="text" class="form-control" name="username" id="exampleInputUsername" placeholder="Username">
+            
+            <label for="exampleInputfname">First Name</label>
+            <input type="text" class="form-control" name="first_name" id="exampleInputfname" placeholder="First name">
+
+            <label for="exampleInputlname">Last Name</label>
+            <input type="text" class="form-control" name="last_name" id="exampleInputlname" placeholder="Last name">
+
+            <label for="exampleInputnumber">Phone Number</label>
+            <input type="text" class="form-control" name="phone_number" id="exampleInputnumber" placeholder="9876543210">
+
+            <label for="exampleInputemail1">Email</label>
+            <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-mail">
+
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" name="password1" class="form-control" id="exampleInputPassword1" aria-describedby="passhelp" placeholder="Password">
+
+            <small id="passhelp" class="form-text text-muted">
+                &nbsp&nbsp&nbsp <b>*</b> Password must be more than 8 characters
+                <br>&nbsp&nbsp&nbsp <b>*</b> Passwrod must be different from Username.
+                <br>&nbsp&nbsp&nbsp <b>*</b> Password must be strong and unique.
+                <br>&nbsp&nbsp&nbsp <b>*</b> Password must contain A-Z,a-z,1-9,@,#,$,&,*...
+            </small>
+            <br>
+            <label for="exampleInputPassword2">Confirm Password</label>
+            <input type="password" name="password2" class="form-control" id="exampleInputPassword2" placeholder="Confirm Password">
+
+          </div><br>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <a href="{% url 'login_user' %}"><button type="button" class="btn btn-success">Already Register</button></a>
+      </form>
+  {% endblock %}       
